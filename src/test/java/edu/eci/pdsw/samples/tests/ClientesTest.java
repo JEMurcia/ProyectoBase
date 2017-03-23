@@ -32,13 +32,13 @@ public class ClientesTest {
     public void setUp() {
     }
     
-  
+    /*
     @Test
     public void additems1() throws ExcepcionServiciosAlquiler{
     	
     }
     
-    /*
+    
     public void addCliente() throws ExcepcionServiciosAlquiler{
         ServiciosAlquiler sa=ServiciosAlquiler.getInstance();
         
