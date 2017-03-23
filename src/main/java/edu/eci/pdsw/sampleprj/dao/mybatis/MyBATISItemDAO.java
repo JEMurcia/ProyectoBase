@@ -6,14 +6,10 @@
 package edu.eci.pdsw.sampleprj.dao.mybatis;
 
 import com.google.inject.Inject;
-import com.google.inject.Singleton;
 import edu.eci.pdsw.sampleprj.dao.ItemDAO;
 import edu.eci.pdsw.sampleprj.dao.PersistenceException;
-import edu.eci.pdsw.sampleprj.dao.mybatis.mappers.ClienteMapper;
 import edu.eci.pdsw.samples.entities.Item;
 import edu.eci.pdsw.sampleprj.dao.mybatis.mappers.ItemMapper;
-import edu.eci.pdsw.samples.entities.TipoItem;
-import java.sql.SQLException;
 
 
 

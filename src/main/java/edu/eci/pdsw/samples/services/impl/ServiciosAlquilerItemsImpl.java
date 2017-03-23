@@ -49,7 +49,11 @@ public class ServiciosAlquilerItemsImpl implements ServiciosAlquiler {
 
     @Override
     public List<Cliente> consultarClientes() throws ExcepcionServiciosAlquiler {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            return daoCliente.loadClientes();
+        } catch (PersistenceException ex) {
+            throw new ExcepcionServiciosAlquiler("no se puede mostrar los clientes", ex);
+        }
     }
 
     @Override
@@ -83,12 +87,16 @@ public class ServiciosAlquilerItemsImpl implements ServiciosAlquiler {
 
     @Override
     public void registrarAlquilerCliente(Date date, long docu, Item item, int numdias) throws ExcepcionServiciosAlquiler {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
     }
 
     @Override
     public void registrarCliente(Cliente p) throws ExcepcionServiciosAlquiler {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            daoCliente.save(p);
+        } catch (PersistenceException ex) {
+            throw new ExcepcionServiciosAlquiler("no se ha registrado el cliente", ex);
+        }
     }
 
     @Override
@@ -108,7 +116,11 @@ public class ServiciosAlquilerItemsImpl implements ServiciosAlquiler {
 
     @Override
     public void registrarItem(Item i) throws ExcepcionServiciosAlquiler {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            daoItem.save(i);
+        } catch (PersistenceException ex) {
+            throw new ExcepcionServiciosAlquiler("no se ha registrado el nuevo item", ex);
+        }
     }
 
     @Override

@@ -74,6 +74,11 @@
         insert into VI_ITEMRENTADO (id,CLIENTES_documento,ITEMS_id,fechainiciorenta,fechafinrenta)
         values (#{idit},#{idcli},#{idit},#{fein},#{fefn})
     </insert>
+    
+    <insert id="agregarCliente">
+        insert into VI_CLIENTES (documento, nombre, telefono, direccion, email, vetado)
+        values (#{cliente.documento}, #{cliente.nombre}, #{cliente.telefono}, #{cliente.direccion}, #{cliente.email}, #{cliente.vetado})
+    </insert>
           	
     <resultMap id="ClienteResult" type="Cliente" >
         <id property="documento" column="documento" />

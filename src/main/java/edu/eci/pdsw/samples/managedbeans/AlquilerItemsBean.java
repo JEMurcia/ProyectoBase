@@ -6,13 +6,10 @@
 package edu.eci.pdsw.samples.managedbeans;
 
 import edu.eci.pdsw.samples.entities.Cliente;
-import edu.eci.pdsw.samples.entities.Item;
 import edu.eci.pdsw.samples.services.ExcepcionServiciosAlquiler;
 import edu.eci.pdsw.samples.services.ServiciosAlquiler;
-
-import edu.eci.pdsw.samples.services.impl.ServiciosAlquilerItemsStub;
+import edu.eci.pdsw.samples.services.ServiciosAlquilerFactory;
 import java.io.Serializable;
-import java.util.ArrayList;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import java.sql.Date;
@@ -20,11 +17,8 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
-import javax.ejb.Init;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
-import org.primefaces.component.message.Message;
 
 /**
  *
@@ -51,21 +45,23 @@ public class AlquilerItemsBean implements Serializable {
     private String email;
     
     
-    //ServiciosAlquiler sp = ServiciosAlquiler.getInstance();
+    ServiciosAlquiler sp = ServiciosAlquilerFactory.getInstance().getServiciosAlquiler();
     
     public AlquilerItemsBean() {
 
         
     }
     
-    public void agregar(){
-        /**try {
-            sp.registrarCliente(new Cliente(getNombre(), getDocumento(), getTelefono(), getDireccion(), getEmail()));
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Correcto", "El usuario fue registrado"));
+    public void agregar() throws ExcepcionServiciosAlquiler{
+        try {             
+              sp.registrarCliente(new Cliente(getNombre(), getDocumento(), getTelefono(), getDireccion(), getEmail()));
+              FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Correcto", "El usuario fue registrado"));
+              
+             
         } catch (ExcepcionServiciosAlquiler ex) {
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error!", "Este usuario ya se encuentra registrado"));
+            throw new ExcepcionServiciosAlquiler(" no se ha podido registrar el cliente "+getNombre(), ex);
         }
-        **/
+
 
     }
 
@@ -79,9 +75,9 @@ public class AlquilerItemsBean implements Serializable {
     }
 
 
-    /*public ServiciosAlquiler getSp() {
+    public ServiciosAlquiler getSp() {
         return sp;
-    }*/
+    }
 
     public Date getFechaActual() {
         return fechaActual;
@@ -104,11 +100,11 @@ public class AlquilerItemsBean implements Serializable {
     }
     
     public void agregarAlquiler(){
-        /*try {
+        try {
             sp.registrarAlquilerCliente(fechaActual, cliente.getDocumento(), sp.consultarItem(codigo), dias);
         } catch (Exception ex) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error: ", ex.getMessage()));
-        }*/
+        }
     }
 
     public long getCostoAlquiler(){
@@ -116,13 +112,13 @@ public class AlquilerItemsBean implements Serializable {
     }
 
     public void calcularCostoAlquiler() {
-        /*try {
+        try {
             this.costoAlquiler = sp.consultarCostoAlquiler(codigo, dias);
             conditionFlag = true;
         } catch (Exception ex) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error: ", ex.getMessage()));
             conditionFlag = false;
-        }*/
+        }
     }
 
     public String getNombre() {
@@ -170,16 +166,16 @@ public class AlquilerItemsBean implements Serializable {
         return conditionFlag;
     }
 
-    /*public List<Cliente> getListaClientes() throws ExcepcionServiciosAlquiler {
+    public List<Cliente> getListaClientes() throws ExcepcionServiciosAlquiler {
         return sp.consultarClientes();
-    }*/
+    }
 
     public void setListaClientes(List<Cliente> listaClientes) {
         this.listaClientes = listaClientes;
 
     }
 
-    /*public long consultarMulta(int iditem,Date fechaDevolucion){
+    public long consultarMulta(int iditem,Date fechaDevolucion){
         long multa = 0;
         try {
             multa = sp.consultarMultaAlquiler(iditem, fechaDevolucion);
@@ -187,5 +183,5 @@ public class AlquilerItemsBean implements Serializable {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error: ", ex.getMessage()));
         }
         return multa;
-    }*/
+    }
 }
