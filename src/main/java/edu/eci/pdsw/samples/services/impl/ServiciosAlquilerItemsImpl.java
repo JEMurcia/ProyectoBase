@@ -13,7 +13,12 @@ import edu.eci.pdsw.samples.entities.TipoItem;
 import edu.eci.pdsw.samples.services.ExcepcionServiciosAlquiler;
 import edu.eci.pdsw.samples.services.ServiciosAlquiler;
 import java.sql.Date;
+
+import java.util.Calendar;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 
 /**
  * 
@@ -44,7 +49,14 @@ public class ServiciosAlquilerItemsImpl implements ServiciosAlquiler {
 
     @Override
     public List<ItemRentado> consultarItemsCliente(long idcliente) throws ExcepcionServiciosAlquiler {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+
+        try {
+            return daoCliente.consultarItems((int) idcliente);
+        } catch (PersistenceException e) {
+            throw new ExcepcionServiciosAlquiler("no se ha podido consultar los items del cliente con "
+                    + "documento "+idcliente, e);
+        }
+
     }
 
     @Override
@@ -87,7 +99,15 @@ public class ServiciosAlquilerItemsImpl implements ServiciosAlquiler {
 
     @Override
     public void registrarAlquilerCliente(Date date, long docu, Item item, int numdias) throws ExcepcionServiciosAlquiler {
-        
+
+        Calendar calendar=Calendar.getInstance();
+        calendar.setTime(date);
+        calendar.add(calendar.DAY_OF_YEAR, numdias);
+        try {
+            daoCliente.registrarItemRentado( (int)(long) docu, item.getId(), date, calendar.getTime());
+        } catch (PersistenceException ex) {
+            Logger.getLogger(ServiciosAlquilerItemsImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @Override

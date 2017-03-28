@@ -70,9 +70,17 @@
         WHERE c.documento = #{idcli}
     </select>
 
+    
+    <select parameterType="map" id="consultarItemsCliente" resultMap="ClienteResult" >
+        select it.nombre
+        from VI_ITEMS as it, VI_ITEMRENTADO as ir, VI_CLIENTES as cl
+        where it.id=ir.ITEMS_id  and ir.CLIENTES_documento = cl.documento
+        and ir.CLIENTES_documento = #{idcli}
+    </select>
+
     <insert id="agregarItemRentadoACliente">
         insert into VI_ITEMRENTADO (id,CLIENTES_documento,ITEMS_id,fechainiciorenta,fechafinrenta)
-        values (#{idit},#{idcli},#{idit},#{fein},#{fefn})
+        values (#{iditem},#{idcli},#{iditem},#{fein},#{fefn})
     </insert>
     
     <insert id="agregarCliente">

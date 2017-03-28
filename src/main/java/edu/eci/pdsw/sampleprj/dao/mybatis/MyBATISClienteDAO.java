@@ -10,6 +10,10 @@ import edu.eci.pdsw.sampleprj.dao.ClienteDAO;
 import edu.eci.pdsw.sampleprj.dao.PersistenceException;
 import edu.eci.pdsw.sampleprj.dao.mybatis.mappers.ClienteMapper;
 import edu.eci.pdsw.samples.entities.Cliente;
+
+import edu.eci.pdsw.samples.entities.Item;
+import edu.eci.pdsw.samples.entities.ItemRentado;
+
 import java.util.Date;
 import java.util.List;
 
@@ -46,6 +50,15 @@ public class MyBATISClienteDAO implements ClienteDAO{
     public void registrarItemRentado(int idcl, int idit, Date fi, Date ff) throws PersistenceException {
         clienteMapper.agregarItemRentadoACliente(idit, idit, fi, ff);
     }
+
+
+    @Override
+    public List<ItemRentado> consultarItems(int idcl) throws PersistenceException {
+        return clienteMapper.consultarItemsCliente(idcl);
+    }
+
+    
+
     
     
     
