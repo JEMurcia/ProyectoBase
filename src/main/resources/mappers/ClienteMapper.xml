@@ -75,7 +75,7 @@
         select it.nombre
         from VI_ITEMS as it, VI_ITEMRENTADO as ir, VI_CLIENTES as cl
         where it.id=ir.ITEMS_id  and ir.CLIENTES_documento = cl.documento
-        and ir.CLIENTES_documento = #{idcli}
+        and ir.CLIENTES_documento = #{idcl}
     </select>
 
     <insert id="agregarItemRentadoACliente">

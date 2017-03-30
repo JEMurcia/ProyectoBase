@@ -7,7 +7,6 @@ package edu.eci.pdsw.sampleprj.dao;
 
 import edu.eci.pdsw.samples.entities.Cliente;
 
-import edu.eci.pdsw.samples.entities.Item;
 import edu.eci.pdsw.samples.entities.ItemRentado;
 
 import java.util.Date;

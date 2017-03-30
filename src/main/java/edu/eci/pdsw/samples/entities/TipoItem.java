@@ -46,7 +46,7 @@ public class TipoItem implements Serializable{
 
     @Override
     public String toString() {
-        return "TipoItem{" + "id=" + id + ", descripcion=" + descripcion + '}';
+        return "TipoItem{" + "id=" + id + ", descripcion=" + descripcion + "}\n";
     }
     
     

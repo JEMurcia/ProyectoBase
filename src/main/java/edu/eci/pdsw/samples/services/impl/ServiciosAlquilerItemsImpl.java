@@ -51,7 +51,9 @@ public class ServiciosAlquilerItemsImpl implements ServiciosAlquiler {
     public List<ItemRentado> consultarItemsCliente(long idcliente) throws ExcepcionServiciosAlquiler {
 
         try {
-            return daoCliente.consultarItems((int) idcliente);
+//            System.out.println(idcliente);
+            return daoCliente.load((int) idcliente).getRentados();
+//                return daoCliente.consultarItems((int) idcliente);
         } catch (PersistenceException e) {
             throw new ExcepcionServiciosAlquiler("no se ha podido consultar los items del cliente con "
                     + "documento "+idcliente, e);
@@ -89,7 +91,11 @@ public class ServiciosAlquilerItemsImpl implements ServiciosAlquiler {
 
     @Override
     public TipoItem consultarTipoItem(int id) throws ExcepcionServiciosAlquiler {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            return daoItem.load(id).getTipo();
+        } catch (PersistenceException ex) {
+            throw new ExcepcionServiciosAlquiler("el tipo de item no se encuentra registrado", ex);
+        }
     }
 
     @Override
