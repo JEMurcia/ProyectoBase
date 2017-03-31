@@ -15,7 +15,7 @@
         c.vetado,
     
         ir.id as IR_id,
-        ir.CLIENTES_documento as IR_documento,
+        <!--ir.CLIENTES_documento as IR_documento,-->
         ir.fechainiciorenta as IR_fechainiciorenta,
         ir.fechafinrenta as IR_fechafinrenta,
     
@@ -47,7 +47,7 @@
         c.vetado,
     
         ir.id as IR_id,
-        ir.CLIENTES_documento as IR_documento,
+        <!--ir.CLIENTES_documento as IR_documento,-->
         ir.fechainiciorenta as IR_fechainiciorenta,
         ir.fechafinrenta as IR_fechafinrenta,
     
@@ -72,7 +72,7 @@
 
     
     <select parameterType="map" id="consultarItemsCliente" resultMap="ClienteResult" >
-        select it.nombre
+        select it.id, it.nombre, it.descripcion, it.fechalanzamiento, it.tarifadia, it.formatorenta, it.genero
         from VI_ITEMS as it, VI_ITEMRENTADO as ir, VI_CLIENTES as cl
         where it.id=ir.ITEMS_id  and ir.CLIENTES_documento = cl.documento
         and ir.CLIENTES_documento = #{idcl}

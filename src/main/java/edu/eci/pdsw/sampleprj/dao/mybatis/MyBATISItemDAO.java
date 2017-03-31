@@ -10,6 +10,8 @@ import edu.eci.pdsw.sampleprj.dao.ItemDAO;
 import edu.eci.pdsw.sampleprj.dao.PersistenceException;
 import edu.eci.pdsw.samples.entities.Item;
 import edu.eci.pdsw.sampleprj.dao.mybatis.mappers.ItemMapper;
+import edu.eci.pdsw.samples.entities.TipoItem;
+import java.util.List;
 
 
 
@@ -43,6 +45,11 @@ public class MyBATISItemDAO implements ItemDAO{
         }
         
         
+    }
+
+    @Override
+    public List<TipoItem> tiposItems() throws PersistenceException {
+        return itemMapper.consultarTiposItems();
     }
     
 }

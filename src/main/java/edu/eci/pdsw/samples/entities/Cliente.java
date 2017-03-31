@@ -7,7 +7,6 @@ package edu.eci.pdsw.samples.entities;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.LinkedList;
 
 
 /**

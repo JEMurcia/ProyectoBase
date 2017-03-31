@@ -187,6 +187,7 @@ public class ServiciosAlquilerItemsStub implements ServiciosAlquiler {
             throw new ExcepcionServiciosAlquiler("El item "+iditem+"no esta en alquiler");
         }
         else{
+            
             ItemRentado ir=itemsrentados.get(iditem);
             
             LocalDate fechaMinimaEntrega=ir.getFechafinrenta().toLocalDate();

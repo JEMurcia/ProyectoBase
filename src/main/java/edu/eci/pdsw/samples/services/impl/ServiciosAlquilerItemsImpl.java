@@ -13,6 +13,8 @@ import edu.eci.pdsw.samples.entities.TipoItem;
 import edu.eci.pdsw.samples.services.ExcepcionServiciosAlquiler;
 import edu.eci.pdsw.samples.services.ServiciosAlquiler;
 import java.sql.Date;
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 
 import java.util.Calendar;
 import java.util.List;
@@ -35,7 +37,7 @@ public class ServiciosAlquilerItemsImpl implements ServiciosAlquiler {
         
     @Override
     public int valorMultaRetrasoxDia() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return 5000;
     }
 
     @Override
@@ -52,8 +54,7 @@ public class ServiciosAlquilerItemsImpl implements ServiciosAlquiler {
 
         try {
 //            System.out.println(idcliente);
-            return daoCliente.load((int) idcliente).getRentados();
-//                return daoCliente.consultarItems((int) idcliente);
+            return daoCliente.consultarItems((int) idcliente);
         } catch (PersistenceException e) {
             throw new ExcepcionServiciosAlquiler("no se ha podido consultar los items del cliente con "
                     + "documento "+idcliente, e);
@@ -86,7 +87,14 @@ public class ServiciosAlquilerItemsImpl implements ServiciosAlquiler {
 
     @Override
     public long consultarMultaAlquiler(int iditem, Date fechaDevolucion) throws ExcepcionServiciosAlquiler {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
+//        return ChronoUnit.DAYS.between(consultarItem(iditem).get, temporal2Exclusive)
+//            
+//            LocalDate fechaMinimaEntrega=ir.getFechafinrenta().toLocalDate();
+//            LocalDate fechaEntrega=fechaDevolucion.toLocalDate();
+//            long diasRetraso = ChronoUnit.DAYS.between(fechaMinimaEntrega, fechaEntrega);
+//            return diasRetraso*valorMultaRetrasoxDia();
+throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
@@ -100,7 +108,11 @@ public class ServiciosAlquilerItemsImpl implements ServiciosAlquiler {
 
     @Override
     public List<TipoItem> consultarTiposItem() throws ExcepcionServiciosAlquiler {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            return daoItem.tiposItems();
+        } catch (PersistenceException ex) {
+            throw new ExcepcionServiciosAlquiler("no se ha logrado consultar los tipos de items", ex);
+        }
     }
 
     @Override
@@ -132,7 +144,7 @@ public class ServiciosAlquilerItemsImpl implements ServiciosAlquiler {
 
     @Override
     public long consultarCostoAlquiler(int iditem, int numdias) throws ExcepcionServiciosAlquiler {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return consultarItem(iditem).getTarifaxDia()*numdias;
     }
 
     @Override

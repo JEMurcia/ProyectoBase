@@ -46,6 +46,12 @@
         
         WHERE i.id = #{idit}
     </select>
+    
+    <select id="consultarTiposItems" parameterType="map" resultMap="TipoItemResult" >
+        select 
+        id, descripcion
+        from VI_TIPOITEM
+    </select>
        
     <resultMap id="ItemResult" type="Item" >
         <id property="id" column="id" />
